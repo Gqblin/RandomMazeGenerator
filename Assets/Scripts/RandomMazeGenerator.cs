@@ -96,7 +96,7 @@ public class RandomMazeGenerator : MonoBehaviour
         }
         else
         {
-            GenerateRandomMaze(null, mazeGrid[0, 0]);
+            GenerateRandomMazeInstant(null, mazeGrid[0, 0]);
         }
         
     }
@@ -118,21 +118,21 @@ public class RandomMazeGenerator : MonoBehaviour
         } while (nextCell != null);
     }
 
-    //private void GenerateRandomMaze(MazeCell previousCell, MazeCell currentCell)
-    //{
-    //    currentCell.MarkAsVisited();
-    //    RemoveWallsBetweenCells(previousCell, currentCell);
-    //    MazeCell nextCell;
+    private void GenerateRandomMazeInstant(MazeCell previousCell, MazeCell currentCell)
+    {
+        currentCell.MarkAsVisited();
+        RemoveWallsBetweenCells(previousCell, currentCell);
+        MazeCell nextCell;
 
-    //    do
-    //    {
-    //        nextCell = GetRandomUnvisitedNeighbour(currentCell);
-    //        if (nextCell != null)
-    //        {
-    //            GenerateRandomMaze(currentCell, nextCell);
-    //        }
-    //    } while (nextCell != null);
-    //}
+        do
+        {
+            nextCell = GetRandomUnvisitedNeighbour(currentCell);
+            if (nextCell != null)
+            {
+                GenerateRandomMazeInstant(currentCell, nextCell);
+            }
+        } while (nextCell != null);
+    }
 
     //returns a random unvisited neighbour cell from the current cell.
     private MazeCell GetRandomUnvisitedNeighbour(MazeCell currentCell)
